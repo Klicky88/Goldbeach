@@ -1,56 +1,67 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goldbeach</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goldbeach</title>
 
-    <style>
-        body {
-            margin: 0;
-            background-color: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
 
-        #bild {
-            max-width: 90vw;
-            max-height: 80vh;
-            width: auto;
-            height: auto;
-            display: block;
-            border-radius: 10px;
-        }
+    #startbild {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 10px;
+      transition: opacity 1s ease;
+    }
 
-        #besucher {
-            margin-top: 25px;
-            color: white;
-            font-size: 18px;
-            letter-spacing: 1px;
-        }
-    </style>
+    #videoBox {
+      display: none;
+      width: 90vw;
+      max-width: 430px;
+      aspect-ratio: 9 / 16;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 
 <body>
 
-    <img id="bild" src="Goldbeach%202.jpeg" alt="Goldbeach">
+  <img id="startbild" src="Goldbeach%202.jpeg" alt="Goldbeach">
 
-   <div id="besucher">Besucher: …</div>
+  <div id="videoBox">
+    <iframe
+      src="https://www.youtube.com/embed/_6HzLIJPH2A?autoplay=1&mute=1&playsinline=1&rel=0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
 
-<script data-goatcounter="https://goldbeach.goatcounter.com/count"
-        async src="https://gc.zgo.at/count.js"></script>
+  <script>
+    setTimeout(function () {
+      document.getElementById("startbild").style.opacity = "0";
 
-<script>
-fetch("https://goldbeach.goatcounter.com/counter/%2FGoldbeach.json")
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById("besucher").textContent = "Besucher: " + data.count;
-  })
-  .catch(() => {
-    document.getElementById("besucher").textContent = "Besucher: –";
-  });
-</script>
+      setTimeout(function () {
+        document.getElementById("startbild").style.display = "none";
+        document.getElementById("videoBox").style.display = "block";
+      }, 1000);
+    }, 2000);
+  </script>
+
+</body>
+</html>
