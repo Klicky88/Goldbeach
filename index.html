@@ -39,23 +39,18 @@
 
     <img id="bild" src="Goldbeach%202.jpeg" alt="Goldbeach">
 
-    <div id="besucher"></div>
+   <div id="besucher">Besucher: …</div>
 
-    <script>
-    var t = setInterval(function () {
-        if (window.goatcounter && window.goatcounter.visit_count) {
-            clearInterval(t);
-            window.goatcounter.visit_count({
-                append: "#besucher",
-                no_branding: true,
-                type: "html"
-            });
-        }
-    }, 100);
-    </script>
+<script data-goatcounter="https://goldbeach.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
 
-    <script data-goatcounter="https://goldbeach.goatcounter.com/count"
-            async src="https://gc.zgo.at/count.js"></script>
-
-</body>
-</html>
+<script>
+fetch("https://goldbeach.goatcounter.com/counter/%2FGoldbeach.json")
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("besucher").textContent = "Besucher: " + data.count;
+  })
+  .catch(() => {
+    document.getElementById("besucher").textContent = "Besucher: –";
+  });
+</script>
