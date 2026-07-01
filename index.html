@@ -11,15 +11,15 @@
       background: black;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: Arial, sans-serif;
-      overflow: hidden;
     }
 
     #startbild {
       max-width: 90vw;
-      max-height: 80vh;
+      max-height: 75vh;
       border-radius: 10px;
       transition: opacity 1s ease;
     }
@@ -37,6 +37,13 @@
       border: 0;
       border-radius: 10px;
     }
+
+    #besucher {
+      margin-top: 20px;
+      color: white;
+      font-size: 18px;
+      opacity: 0.8;
+    }
   </style>
 </head>
 
@@ -52,6 +59,8 @@
     </iframe>
   </div>
 
+  <div id="besucher">Besucher: …</div>
+
   <script>
     setTimeout(function () {
       document.getElementById("startbild").style.opacity = "0";
@@ -61,6 +70,20 @@
         document.getElementById("videoBox").style.display = "block";
       }, 1000);
     }, 2000);
+  </script>
+
+  <script data-goatcounter="https://goldbeach.goatcounter.com/count"
+          async src="https://gc.zgo.at/count.js"></script>
+
+  <script>
+    fetch("https://goldbeach.goatcounter.com/counter/%2FGoldbeach.json")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("besucher").textContent = "Besucher: " + data.count;
+      })
+      .catch(() => {
+        document.getElementById("besucher").textContent = "Besucher: –";
+      });
   </script>
 
 </body>
