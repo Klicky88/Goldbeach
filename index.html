@@ -2,31 +2,43 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Goldstrand 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Bild</title>
 
   <style>
     body {
       margin: 0;
-      background-color: black;
+      background: black;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+
+      /* wichtig für iPhone Notch / Safe Area */
+      padding: env(safe-area-inset-top)
+               env(safe-area-inset-right)
+               env(safe-area-inset-bottom)
+               env(safe-area-inset-left);
     }
 
     img {
-      width: 85vw;
-      max-width: 700px;
-      height: auto;
+      /* passt sich automatisch an jede Bildschirmgröße an */
+      max-width: 92vw;
+      max-height: 92vh;
+
+      /* sorgt dafür, dass das Bild immer vollständig sichtbar bleibt */
       object-fit: contain;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+
+      border-radius: 12px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.7);
+
+      /* verhindert unschöne Skalierung */
+      display: block;
     }
   </style>
 </head>
 
 <body>
-  <img src="_com.apple.Pasteboard.vn5kOa.jpeg">
+  <img src="_com.apple.Pasteboard.vn5kOa.jpeg" alt="Bild">
 </body>
 </html>
