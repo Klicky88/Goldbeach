@@ -1,33 +1,61 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bild</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goldbeach</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-    img {
-      max-width: 92vw;
-      max-height: 92vh;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      display: block;
-      border-radius: 12px;
-    }
-  </style>
+        #bild {
+            max-width: 90vw;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        #besucher {
+            margin-top: 25px;
+            color: white;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
 
 <body>
-  <img src="Goldbeach 2.jpeg" alt="Bild">
+
+    <img id="bild" src="Goldbeach%202.jpeg" alt="Goldbeach">
+
+    <div id="besucher"></div>
+
+    <script>
+    var t = setInterval(function () {
+        if (window.goatcounter && window.goatcounter.visit_count) {
+            clearInterval(t);
+            window.goatcounter.visit_count({
+                append: "#besucher",
+                no_branding: true,
+                type: "html"
+            });
+        }
+    }, 100);
+    </script>
+
+    <script data-goatcounter="https://goldbeach.goatcounter.com/count"
+            async src="https://gc.zgo.at/count.js"></script>
+
 </body>
 </html>
