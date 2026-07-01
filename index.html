@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bild</title>
 
   <style>
@@ -13,27 +13,16 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-
-      /* wichtig für iPhone Notch / Safe Area */
-      padding: env(safe-area-inset-top)
-               env(safe-area-inset-right)
-               env(safe-area-inset-bottom)
-               env(safe-area-inset-left);
     }
 
     img {
-      /* passt sich automatisch an jede Bildschirmgröße an */
       max-width: 92vw;
       max-height: 92vh;
-
-      /* sorgt dafür, dass das Bild immer vollständig sichtbar bleibt */
+      width: auto;
+      height: auto;
       object-fit: contain;
-
-      border-radius: 12px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.7);
-
-      /* verhindert unschöne Skalierung */
       display: block;
+      border-radius: 12px;
     }
   </style>
 </head>
