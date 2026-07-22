@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Nimm Dani mit, sie schnarcht!</title>
+<title>Nimm Dani mit!</title>
 
 <style>
 *{
@@ -23,55 +22,47 @@ body{
     font-family:Arial, Helvetica, sans-serif;
 }
 
-.container{
-    text-align:center;
-}
-
 .text{
-    color:#ff0000;
-    font-size:clamp(2.5rem,7vw,6rem);
+    color:#ff1a1a;
     font-weight:bold;
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:5px solid red;
-    width:0;
-    animation:
-        schreiben 4s steps(30,end) forwards,
-        cursor 0.8s step-end infinite,
-        pulsieren 2s ease-in-out 4.2s infinite;
+    text-align:center;
+    line-height:1.2;
+    width:90%;
+    font-size:clamp(2rem, 8vw, 5rem);
+
     text-shadow:
-        0 0 10px red,
-        0 0 25px red;
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 40px #ff3333;
+
+    animation:
+        pulse 1.5s infinite alternate,
+        float 3s ease-in-out infinite;
 }
 
-@keyframes schreiben{
+@keyframes pulse{
     from{
-        width:0;
-    }
-    to{
-        width:100%;
-    }
-}
-
-@keyframes cursor{
-    50%{
-        border-color:transparent;
-    }
-}
-
-@keyframes pulsieren{
-    0%,100%{
         transform:scale(1);
         text-shadow:
-            0 0 10px red,
-            0 0 25px red;
+            0 0 10px #ff0000,
+            0 0 20px #ff0000,
+            0 0 40px #ff3333;
     }
-    50%{
+    to{
         transform:scale(1.08);
         text-shadow:
-            0 0 20px red,
-            0 0 45px red,
-            0 0 80px red;
+            0 0 20px #ff0000,
+            0 0 40px #ff0000,
+            0 0 80px #ff4444;
+    }
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-10px);
     }
 }
 </style>
@@ -79,8 +70,9 @@ body{
 
 <body>
 
-<div class="container">
-    <div class="text">Nimm Dani mit, sie schnarcht!</div>
+<div class="text">
+Nimm Dani mit,<br>
+sie schnarcht! :)
 </div>
 
 </body>
