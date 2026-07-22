@@ -1,93 +1,87 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Happy Birthday Dorte</title>
+<title>Nimm Dani mit, sie schnarcht!</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.container{
+    text-align:center;
+}
+
+.text{
+    color:#ff0000;
+    font-size:clamp(2.5rem,7vw,6rem);
+    font-weight:bold;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:5px solid red;
+    width:0;
+    animation:
+        schreiben 4s steps(30,end) forwards,
+        cursor 0.8s step-end infinite,
+        pulsieren 2s ease-in-out 4.2s infinite;
+    text-shadow:
+        0 0 10px red,
+        0 0 25px red;
+}
+
+@keyframes schreiben{
+    from{
+        width:0;
     }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background-color: black;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      overflow: hidden;
-      font-family: Arial, Helvetica, sans-serif;
+    to{
+        width:100%;
     }
+}
 
-    h1 {
-      margin: 20px;
-      color: red;
-      font-size: clamp(3rem, 10vw, 9rem);
-      font-weight: bold;
-      text-align: center;
-      line-height: 1.1;
-
-      animation: pulsieren 1.8s ease-in-out infinite;
+@keyframes cursor{
+    50%{
+        border-color:transparent;
     }
+}
 
-    @keyframes pulsieren {
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 0.8;
+@keyframes pulsieren{
+    0%,100%{
+        transform:scale(1);
         text-shadow:
-          0 0 10px red,
-          0 0 20px red;
-      }
-
-      50% {
-        transform: scale(1.08);
-        opacity: 1;
-        text-shadow:
-          0 0 20px red,
-          0 0 40px red,
-          0 0 70px red;
-      }
+            0 0 10px red,
+            0 0 25px red;
     }
-  </style>
+    50%{
+        transform:scale(1.08);
+        text-shadow:
+            0 0 20px red,
+            0 0 45px red,
+            0 0 80px red;
+    }
+}
+</style>
 </head>
 
 <body>
-  <h1>Happy Birthday Dorte</h1>
-</body>
-</html>
 
-  <div id="besucher">Besucher: …</div>
-
-  <script>
-    setTimeout(function () {
-      document.getElementById("startbild").style.opacity = "0";
-
-      setTimeout(function () {
-        document.getElementById("startbild").style.display = "none";
-        document.getElementById("videoBox").style.display = "block";
-      }, 1000);
-    }, 2000);
-  </script>
-
-  <script data-goatcounter="https://goldbeach.goatcounter.com/count"
-          async src="https://gc.zgo.at/count.js"></script>
-
-  <script>
-    fetch("https://goldbeach.goatcounter.com/counter/%2FGoldbeach%2F.json")
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("besucher").textContent = "Besucher: " + data.count;
-      })
-      .catch(() => {
-        document.getElementById("besucher").textContent = "Besucher: –";
-      });
-  </script>
+<div class="container">
+    <div class="text">Nimm Dani mit, sie schnarcht!</div>
+</div>
 
 </body>
 </html>
