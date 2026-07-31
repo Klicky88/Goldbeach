@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <title>YOU GOT RICKROLLED</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .gif-box {
+      width: min(92vw, 470px);
+      margin: 0 auto;
+      overflow: hidden;
+      border: 3px solid #fff;
+      border-radius: 18px;
+      box-shadow: 0 0 12px #fff, 0 0 30px #00ffff;
+    }
+
+    .gif-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    h1 {
+      margin: 28px 0 0;
+      font-size: clamp(34px, 10vw, 68px);
+      line-height: 1.03;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 8px #fff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+      animation: blink .85s infinite;
+    }
+
+    .counter {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 11px 18px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #visitor-count { color: #00ffff; }
+
+    .music-button {
+      display: block;
+      margin: 16px auto 0;
+      padding: 12px 20px;
+      border: 1px solid #fff;
+      border-radius: 999px;
+      background: #111;
+      color: #fff;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      touch-action: manipulation;
+    }
+
+    .start-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: #000;
+      text-align: center;
+    }
+
+    .start-screen.hidden {
+      display: none;
+    }
+
+    .start-screen h2 {
+      margin: 0;
+      font-size: clamp(38px, 12vw, 76px);
+      text-shadow: 0 0 10px #fff, 0 0 30px #00ffff;
+    }
+
+    .start-screen p {
+      margin: 22px 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .start-button {
+      position: relative;
+      z-index: 100000;
+      display: inline-block;
+      min-width: 180px;
+      min-height: 58px;
+      padding: 15px 32px;
+      border: 0;
+      border-radius: 999px;
+      background: #fff;
+      color: #000;
+      font-size: 22px;
+      font-weight: 900;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      touch-action: manipulation;
+      box-shadow: 0 0 15px #fff, 0 0 35px #00ffff;
+    }
+
+    @keyframes blink {
+      0%, 45%, 100% { opacity: 1; }
+      50%, 75% { opacity: .12; }
+    }
+
+    @media (max-height: 720px) {
+      .gif-box { width: min(68vw, 330px); }
+      h1 { margin-top: 16px; font-size: clamp(29px, 8vw, 48px); }
+      .counter { margin-top: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="start-screen" id="start-screen">
+    <h2>ARE YOU READY?</h2>
+    <p>Tippe auf START</p>
+
+    <!-- Inline-Aufruf funktioniert auch dann, wenn andere Skripte nicht laden. -->
+    <button
+      class="start-button"
+      id="start-button"
+      type="button"
+      onclick="startRickroll()"
+      ontouchend="startRickroll(); return false;"
+    >
+      START
+    </button>
+  </div>
+
+  <main class="page">
+    <div class="gif-box">
+      <img src="./giphy-downsized.GIF" alt="Rickroll GIF">
+    </div>
+
+    <h1>YOU GOT<br>RICKROLLED</h1>
+
+    <div class="counter">
+      Besucher Nr. <span id="visitor-count">...</span>
+    </div>
+
+    <button class="music-button" id="music-button" type="button" onclick="toggleMusic()">
+      ▶️ Musik starten
+    </button>
+  </main>
+
+  <audio id="background-music" loop preload="auto" playsinline webkit-playsinline>
+    <source src="./Rickroll.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    var music = document.getElementById("background-music");
+    var startScreen = document.getElementById("start-screen");
+    var musicButton = document.getElementById("music-button");
+    var starting = false;
+
+    function startRickroll() {
+      if (starting) return;
+      starting = true;
+
+      /* Startfenster sofort schließen, unabhängig davon, ob Audio klappt. */
+      startScreen.className = "start-screen hidden";
+
+      music.muted = false;
+      music.volume = 1;
+
+      var playPromise = music.play();
+
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.then(function () {
+          musicButton.textContent = "🔊 Musik ausschalten";
+        }).catch(function () {
+          musicButton.textContent = "▶️ Musik starten";
+        });
+      } else {
+        musicButton.textContent = "🔊 Musik ausschalten";
+      }
+
+      setTimeout(function () {
+        starting = false;
+      }, 500);
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.muted = false;
+        music.volume = 1;
+
+        var playPromise = music.play();
+
+        if (playPromise && typeof playPromise.then === "function") {
+          playPromise.then(function () {
+            musicButton.textContent = "🔊 Musik ausschalten";
+          }).catch(function () {
+            musicButton.textContent = "❌ Musik konnte nicht starten";
+          });
+        }
+      } else {
+        music.pause();
+        musicButton.textContent = "▶️ Musik einschalten";
+      }
+    }
+
+    music.addEventListener("error", function () {
+      musicButton.textContent = "❌ Rickroll.mp3 nicht gefunden";
+    });
+
+    /*
+      Einfacher Besucherzähler ohne externe JavaScript-Bibliothek.
+      Fällt der Dienst aus, bleibt die Seite trotzdem vollständig bedienbar.
+    */
+    fetch("https://api.counterapi.dev/v1/dkl-rickroll-2026/seitenbesucher/up")
+      .then(function (response) {
+        if (!response.ok) throw new Error("Counter nicht erreichbar");
+        return response.json();
+      })
+      .then(function (data) {
+        var value = data.count || data.value;
+        document.getElementById("visitor-count").textContent =
+          Number(value).toLocaleString("de-DE");
+      })
+      .catch(function () {
+        document.getElementById("visitor-count").textContent = "👀";
+      });
+  </script>
+</body>
+</html>
