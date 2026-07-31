@@ -1,33 +1,269 @@
-<!-- GoatCounter Tracking -->
-<script data-goatcounter="https://goldbeach.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
 
-<!-- Besucherzähler -->
-<div id="counter" style="margin-top:25px;"></div>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-<script>
-window.addEventListener("load", function () {
-    var t = setInterval(function () {
-        if (window.goatcounter && window.goatcounter.visit_count) {
-            clearInterval(t);
+    <title>YOU GOT RICKROLLED</title>
 
-            window.goatcounter.visit_count({
-                append: "#counter",
-                path: "TOTAL",
-                no_branding: true,
-                style: `
-                    div{
-                        background:#000;
-                        color:#fff;
-                        border:2px solid #fff;
-                        border-radius:12px;
-                        padding:10px 18px;
-                        font-size:22px;
-                        font-family:Arial, sans-serif;
-                    }
-                `
-            });
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }, 100);
-});
-</script>
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100svh;
+            padding:
+                max(20px, env(safe-area-inset-top))
+                16px
+                max(20px, env(safe-area-inset-bottom));
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #000;
+            color: #fff;
+
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+
+            animation: backgroundPulse 2s infinite alternate;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 540px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            text-align: center;
+        }
+
+        .gif-wrapper {
+            width: min(92vw, 480px);
+            overflow: hidden;
+
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            border-radius: 18px;
+
+            box-shadow:
+                0 0 10px #fff,
+                0 0 25px #00ffff,
+                0 0 50px #00ffff;
+
+            animation: gifPulse 2.2s infinite ease-in-out;
+        }
+
+        .tenor-gif-embed {
+            width: 100% !important;
+            margin: 0 !important;
+        }
+
+        h1 {
+            margin-top: 30px;
+
+            font-size: clamp(34px, 10vw, 68px);
+            line-height: 1.05;
+            font-weight: 900;
+            letter-spacing: 1px;
+
+            color: #fff;
+
+            text-shadow:
+                0 0 8px #fff,
+                0 0 18px #00ffff,
+                0 0 35px #00ffff,
+                0 0 60px #00ffff;
+
+            animation:
+                blink 0.85s infinite,
+                textPulse 1.7s infinite ease-in-out;
+        }
+
+        .counter-box {
+            margin-top: 26px;
+            padding: 12px 20px;
+
+            font-size: clamp(16px, 4.5vw, 22px);
+            font-weight: bold;
+
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+
+            box-shadow:
+                0 0 10px rgba(255, 255, 255, 0.35),
+                0 0 18px rgba(0, 255, 255, 0.35);
+
+            backdrop-filter: blur(5px);
+        }
+
+        #visitor-count {
+            display: inline-block;
+            min-width: 30px;
+            color: #00ffff;
+        }
+
+        .emoji {
+            margin-top: 14px;
+            font-size: 28px;
+        }
+
+        @keyframes blink {
+            0%,
+            42% {
+                opacity: 1;
+            }
+
+            50%,
+            78% {
+                opacity: 0.15;
+            }
+
+            86%,
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes textPulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes gifPulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.025);
+            }
+        }
+
+        @keyframes backgroundPulse {
+            from {
+                background: #000;
+            }
+
+            to {
+                background: #111;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .gif-wrapper {
+                width: min(75vw, 360px);
+            }
+
+            h1 {
+                margin-top: 18px;
+                font-size: clamp(30px, 8vw, 52px);
+            }
+
+            .counter-box {
+                margin-top: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body,
+            .gif-wrapper,
+            h1 {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- Tenor-GIF -->
+        <div class="gif-wrapper">
+            <div
+                class="tenor-gif-embed"
+                data-postid="22954713"
+                data-share-method="host"
+                data-aspect-ratio="1"
+                data-width="100%">
+            </div>
+        </div>
+
+        <!-- Blinkender Text -->
+        <h1>YOU GOT<br>RICKROLLED</h1>
+
+        <!-- Besucherzähler -->
+        <div class="counter-box">
+            Besucher Nr.
+            <span id="visitor-count">...</span>
+        </div>
+
+        <div class="emoji">😂</div>
+
+    </main>
+
+    <!-- Lädt das GIF von Tenor -->
+    <script async src="https://tenor.com/embed.js"></script>
+
+    <!-- Besucherzähler -->
+    <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const countElement = document.getElementById("visitor-count");
+
+            try {
+                /*
+                 * Diese beiden Namen sollten möglichst eindeutig sein.
+                 * Ändere "dein-github-name" zu deinem GitHub-Benutzernamen.
+                 */
+                const counter = new Counter({
+                    workspace: "dein-github-name-rickroll"
+                });
+
+                counter
+                    .up("seitenbesucher")
+                    .then(function (result) {
+                        countElement.textContent =
+                            Number(result.value).toLocaleString("de-DE");
+                    })
+                    .catch(function (error) {
+                        console.error("Besucherzähler konnte nicht geladen werden:", error);
+                        countElement.textContent = "👀";
+                    });
+
+            } catch (error) {
+                console.error("Fehler beim Besucherzähler:", error);
+                countElement.textContent = "👀";
+            }
+        });
+    </script>
+
+</body>
+</html>
