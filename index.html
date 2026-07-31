@@ -21,24 +21,27 @@
         body {
             width: 100%;
             min-height: 100%;
+            background: #000;
         }
 
         body {
             min-height: 100svh;
-            padding:
-                max(20px, env(safe-area-inset-top))
-                16px
-                max(20px, env(safe-area-inset-bottom));
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            background: #000;
+            padding:
+                max(18px, env(safe-area-inset-top))
+                14px
+                max(18px, env(safe-area-inset-bottom));
+
+            overflow-x: hidden;
+
             color: #fff;
+            background: #000;
 
             font-family: Arial, Helvetica, sans-serif;
-            overflow-x: hidden;
 
             animation: backgroundPulse 2s infinite alternate;
         }
@@ -54,12 +57,17 @@
             text-align: center;
         }
 
+        /* GIF-Bereich */
+
         .gif-wrapper {
             width: min(92vw, 480px);
+
             overflow: hidden;
 
-            border: 3px solid rgba(255, 255, 255, 0.8);
+            border: 3px solid rgba(255, 255, 255, 0.9);
             border-radius: 18px;
+
+            background: #000;
 
             box-shadow:
                 0 0 10px #fff,
@@ -69,16 +77,23 @@
             animation: gifPulse 2.2s infinite ease-in-out;
         }
 
-        .tenor-gif-embed {
-            width: 100% !important;
-            margin: 0 !important;
+        .gif-wrapper img {
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            object-fit: contain;
         }
+
+        /* Überschrift */
 
         h1 {
             margin-top: 30px;
 
             font-size: clamp(34px, 10vw, 68px);
             line-height: 1.05;
+
             font-weight: 900;
             letter-spacing: 1px;
 
@@ -95,8 +110,10 @@
                 textPulse 1.7s infinite ease-in-out;
         }
 
+        /* Besucherzähler */
+
         .counter-box {
-            margin-top: 26px;
+            margin-top: 25px;
             padding: 12px 20px;
 
             font-size: clamp(16px, 4.5vw, 22px);
@@ -118,13 +135,112 @@
         #visitor-count {
             display: inline-block;
             min-width: 30px;
+
             color: #00ffff;
+        }
+
+        /* Musikknopf */
+
+        .music-button {
+            margin-top: 18px;
+            padding: 10px 18px;
+
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+
+            font-size: 16px;
+            font-weight: bold;
+
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 999px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 0 10px rgba(0, 255, 255, 0.4);
+
+            transition:
+                transform 0.2s,
+                background 0.2s;
+        }
+
+        .music-button:active {
+            transform: scale(0.95);
         }
 
         .emoji {
             margin-top: 14px;
-            font-size: 28px;
+            font-size: 30px;
         }
+
+        /* Startbildschirm */
+
+        .start-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+
+            text-align: center;
+            background: #000;
+
+            cursor: pointer;
+        }
+
+        .start-screen h2 {
+            font-size: clamp(35px, 11vw, 72px);
+            line-height: 1.05;
+
+            color: #fff;
+
+            text-shadow:
+                0 0 10px #fff,
+                0 0 25px #00ffff,
+                0 0 50px #00ffff;
+
+            animation: startPulse 1.2s infinite ease-in-out;
+        }
+
+        .start-screen p {
+            margin-top: 25px;
+
+            font-size: clamp(18px, 5vw, 26px);
+            font-weight: bold;
+
+            color: #fff;
+        }
+
+        .start-button {
+            margin-top: 25px;
+            padding: 15px 30px;
+
+            color: #000;
+            background: #fff;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            border: none;
+            border-radius: 999px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 0 15px #fff,
+                0 0 35px #00ffff;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Animationen */
 
         @keyframes blink {
             0%,
@@ -134,7 +250,7 @@
 
             50%,
             78% {
-                opacity: 0.15;
+                opacity: 0.1;
             }
 
             86%,
@@ -171,30 +287,39 @@
             }
 
             to {
-                background: #111;
+                background: #101010;
             }
         }
 
-        @media (max-height: 700px) {
+        @keyframes startPulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        /* Kleine Smartphone-Displays */
+
+        @media (max-height: 720px) {
             .gif-wrapper {
-                width: min(75vw, 360px);
+                width: min(72vw, 350px);
             }
 
             h1 {
                 margin-top: 18px;
-                font-size: clamp(30px, 8vw, 52px);
+                font-size: clamp(29px, 8vw, 50px);
             }
 
             .counter-box {
                 margin-top: 16px;
             }
-        }
 
-        @media (prefers-reduced-motion: reduce) {
-            body,
-            .gif-wrapper,
-            h1 {
-                animation: none;
+            .music-button {
+                margin-top: 12px;
             }
         }
     </style>
@@ -202,21 +327,32 @@
 
 <body>
 
+    <!-- Startbildschirm zum Aktivieren der Musik -->
+    <div class="start-screen" id="start-screen">
+        <h2>ARE YOU READY?</h2>
+
+        <p>Tippe hier, um fortzufahren</p>
+
+        <button class="start-button" id="start-button">
+            START
+        </button>
+    </div>
+
     <main class="page">
 
-        <!-- Tenor-GIF -->
+        <!-- Dein GIF aus dem GitHub-Repository -->
         <div class="gif-wrapper">
-            <div
-                class="tenor-gif-embed"
-                data-postid="22954713"
-                data-share-method="host"
-                data-aspect-ratio="1"
-                data-width="100%">
-            </div>
+            <img
+                src="giphy-downsized.GIF"
+                alt="Rickroll GIF"
+            >
         </div>
 
         <!-- Blinkender Text -->
-        <h1>YOU GOT<br>RICKROLLED</h1>
+        <h1>
+            YOU GOT<br>
+            RICKROLLED
+        </h1>
 
         <!-- Besucherzähler -->
         <div class="counter-box">
@@ -224,25 +360,85 @@
             <span id="visitor-count">...</span>
         </div>
 
+        <!-- Musik ein- und ausschalten -->
+        <button class="music-button" id="music-button">
+            🔊 Musik ausschalten
+        </button>
+
         <div class="emoji">😂</div>
 
     </main>
 
-    <!-- Lädt das GIF von Tenor -->
-    <script async src="https://tenor.com/embed.js"></script>
+    <!-- Musikdatei muss ebenfalls bei GitHub hochgeladen werden -->
+    <audio id="background-music" loop preload="auto">
+        <source src="Rickroll.mp3" type="audio/mpeg">
+        Dein Browser unterstützt keine Audiowiedergabe.
+    </audio>
 
-    <!-- Besucherzähler -->
+    <!-- CounterAPI -->
     <script src="https://cdn.jsdelivr.net/npm/counterapi/dist/counter.browser.min.js"></script>
 
     <script>
+        const startScreen = document.getElementById("start-screen");
+        const startButton = document.getElementById("start-button");
+        const musicButton = document.getElementById("music-button");
+        const music = document.getElementById("background-music");
+
+        /*
+         * Musiklautstärke:
+         * 0.0 = lautlos
+         * 1.0 = volle Lautstärke
+         */
+        music.volume = 1.0;
+
+        function startPage() {
+            startScreen.classList.add("hidden");
+
+            music.play()
+                .then(function () {
+                    musicButton.textContent = "🔊 Musik ausschalten";
+                })
+                .catch(function (error) {
+                    console.log("Musik konnte nicht automatisch starten:", error);
+                    musicButton.textContent = "🔇 Musik einschalten";
+                });
+        }
+
+        startButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            startPage();
+        });
+
+        startScreen.addEventListener("click", startPage);
+
+        musicButton.addEventListener("click", function () {
+            if (music.paused) {
+                music.play()
+                    .then(function () {
+                        musicButton.textContent = "🔊 Musik ausschalten";
+                    })
+                    .catch(function (error) {
+                        console.log("Musik konnte nicht gestartet werden:", error);
+                    });
+            } else {
+                music.pause();
+                musicButton.textContent = "🔇 Musik einschalten";
+            }
+        });
+
+        /*
+         * Besucherzähler
+         *
+         * Ändere den Workspace-Namen zu einem möglichst
+         * einmaligen Namen, zum Beispiel:
+         *
+         * dani-rickroll-2026
+         */
         document.addEventListener("DOMContentLoaded", function () {
-            const countElement = document.getElementById("visitor-count");
+            const countElement =
+                document.getElementById("visitor-count");
 
             try {
-                /*
-                 * Diese beiden Namen sollten möglichst eindeutig sein.
-                 * Ändere "dein-github-name" zu deinem GitHub-Benutzernamen.
-                 */
                 const counter = new Counter({
                     workspace: "dein-github-name-rickroll"
                 });
@@ -254,12 +450,20 @@
                             Number(result.value).toLocaleString("de-DE");
                     })
                     .catch(function (error) {
-                        console.error("Besucherzähler konnte nicht geladen werden:", error);
+                        console.error(
+                            "Besucherzähler konnte nicht geladen werden:",
+                            error
+                        );
+
                         countElement.textContent = "👀";
                     });
 
             } catch (error) {
-                console.error("Fehler beim Besucherzähler:", error);
+                console.error(
+                    "Fehler beim Besucherzähler:",
+                    error
+                );
+
                 countElement.textContent = "👀";
             }
         });
